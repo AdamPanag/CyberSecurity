@@ -37,6 +37,7 @@
 
 require_once("dropbox_init1.inc.php");
 include "../../include/lib/forcedownload.php";
+include"../phpbb/functions.php";
 $nameTools = $dropbox_lang["dropbox"];
 
 /**
@@ -199,7 +200,7 @@ if (!isset( $_POST['authors']) || !isset( $_POST['description']))
 			{
 				move_uploaded_file($dropbox_filetmpname, $dropbox_cnf["sysPath"] . '/' . $dropbox_filename)
 				or die($dropbox_lang["uploadError"]);
-				new Dropbox_SentWork($uid, $dropbox_title, $_POST['description'], $_POST['authors'], $dropbox_filename, $dropbox_filesize, $newWorkRecipients);
+				new Dropbox_SentWork($uid, $dropbox_title, strip_tags(own_stripslashes($_POST['description'])), strip_tags(own_stripslashes($_POST['authors'])), $dropbox_filename, $dropbox_filesize, $newWorkRecipients);
 			}
 		}
 		chdir ($cwd);
