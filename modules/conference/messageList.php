@@ -99,7 +99,7 @@ if (isset($_GET['store']) && $is_adminOfCourse) {
 if (isset($chatLine) and trim($chatLine) != '') {
 	$fchat = fopen($fileChatName,'a');
 	$chatLine = mathfilter($chatLine, 12, '../../courses/mathimg/');
-	fwrite($fchat,$timeNow.' - '.$nick.' : '.stripslashes($chatLine)."\n");
+	fwrite($fchat,$timeNow.' - '.$nick.' : '.strip_tags(own_stripslashes($chatLine))."\n");
 	fclose($fchat);
 }
 
@@ -121,6 +121,21 @@ foreach ($fileReverse as $thisLine) {
 }
 
 echo "</body></html>\n";
+
+function own_stripslashes($string)
+{
+   $find = array(
+            '/\\\\\'/',  // \\\'
+            '/\\\\/',    // \\
+				'/\\\'/',    // \'
+            '/\\\"/');   // \"
+   $replace = array(
+            '\'',   // \
+            '\\',   // \
+            '\'',   // '
+            '"');   // "
+   return preg_replace($find, $replace, $string);
+}
 
 
 /*
