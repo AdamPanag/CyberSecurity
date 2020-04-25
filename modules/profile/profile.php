@@ -166,12 +166,12 @@ $sqlGetInfoUser ="SELECT nom, prenom, username, password, email, am, perso, lang
 $result=mysql_query($sqlGetInfoUser);
 $myrow = mysql_fetch_array($result);
 
-$nom_form = $myrow['nom'];
-$prenom_form = $myrow['prenom'];
+$nom_form = strip_tags($myrow['nom']);
+$prenom_form = strip_tags($myrow['prenom']);
 $username_form = $myrow['username'];
 $password_form = $myrow['password'];
-$email_form = $myrow['email'];
-$am_form = $myrow['am'];
+$email_form = strip_tags($myrow['email']);
+$am_form = strip_tags($myrow['am']);
 ##[BEGIN personalisation modification, added 'personalisation on SELECT]############
 $persoStatus=	$myrow['perso'];
 $userLang = $myrow['lang'];

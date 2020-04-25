@@ -205,9 +205,9 @@ if (!isset($submit)) {
 	$last_id = mysql_insert_id();
 	$result=mysql_query("SELECT user_id, nom, prenom FROM `$mysqlMainDb`.user WHERE user_id='$last_id'");
 	while ($myrow = mysql_fetch_array($result)) {
-		$uid=$myrow[0];
-		$nom=$myrow[1];
-		$prenom=$myrow[2];
+		$uid=strip_tags($myrow[0]);
+		$nom=strip_tags($myrow[1]);
+		$prenom=strip_tags($myrow[2]);
 	}
 	mysql_query("INSERT INTO `$mysqlMainDb`.loginout (loginout.idLog, loginout.id_user, loginout.ip, loginout.when, loginout.action)
 	VALUES ('', '".$uid."', '".$REMOTE_ADDR."', NOW(), 'LOGIN')");
